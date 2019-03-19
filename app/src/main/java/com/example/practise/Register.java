@@ -57,7 +57,7 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        userLogin.setOnClickListener(new View.OnClickListener() {
+      userLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Register.this, MainActivity.class));
@@ -70,7 +70,7 @@ public class Register extends AppCompatActivity {
         userEmail = (EditText)findViewById(R.id.etUserEmail);
         userPassword = (EditText)findViewById(R.id.etUserPassword);
         regButton = (Button)findViewById(R.id.btnRegister);
-        userLogin = (TextView) findViewById(R.id.tvRegister);
+        userLogin = (TextView) findViewById(R.id.tvLogin);
     }
 
     private Boolean validate(){
