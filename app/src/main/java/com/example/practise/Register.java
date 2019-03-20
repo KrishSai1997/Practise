@@ -1,5 +1,6 @@
 package com.example.practise;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,8 @@ public class Register extends AppCompatActivity {
     private Button regButton;
     private TextView userLogin;
     private FirebaseAuth firebaseAuth;
+    //private ProgressDialog progressDialog;
+    //private
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class Register extends AppCompatActivity {
         setupUIViews();
 
         firebaseAuth = FirebaseAuth.getInstance();
+        //progressDialog =new ProgressDialog((this));
 
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +83,8 @@ public class Register extends AppCompatActivity {
         String name = userName.getText().toString();
         String email = userEmail.getText().toString();
         String password = userPassword.getText().toString();
+        /*progressDialog.setMessage("Loading... Please Wait");
+        progressDialog.show();*/
 
         if ( name.isEmpty() || email.isEmpty() || password.isEmpty() ){
             Toast.makeText(this, "Please Enter All The Details", Toast.LENGTH_SHORT).show();

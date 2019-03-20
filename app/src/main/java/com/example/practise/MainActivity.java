@@ -1,5 +1,6 @@
 package com.example.practise;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView Signup;
     private FirebaseAuth firebaseAuth;
     //private ProgressBar
+    private ProgressDialog progressDialog;
 
 
 
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         Signup = (TextView)findViewById(R.id.tvRegister);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        progressDialog =new ProgressDialog((this));
+
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         if (user != null){
@@ -65,10 +69,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void validate(String userName, String userPassword){
 
+        progressDialog.setMessage("Loading... Please Wait");
+        progressDialog.show();
+
         firebaseAuth.signInWithEmailAndPassword(userName,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                  if (task.isSuccessful()){
+                     progressDialog.dismiss();
                      startActivity(new Intent(MainActivity.this, HomeActivity.class));
                      Toast.makeText(MainActivity.this, "Login Successfull",Toast.LENGTH_SHORT).show();
                  }else{
