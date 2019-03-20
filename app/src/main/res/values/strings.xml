@@ -3,4 +3,7 @@
     <string name="etName">Practise</string>
     <string name="etPassword">Practise</string>
     <string name="btnLogin">Practise</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_takeorder">Take Order</string>
+    <string name="nav_account">My Account</string>
 </resources>
