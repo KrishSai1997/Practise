@@ -3,11 +3,13 @@ package com.example.practise;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private Button Login;
     private TextView Signup;
     private FirebaseAuth firebaseAuth;
-    //private ProgressBar
     private ProgressDialog progressDialog;
-
 
 
     @Override

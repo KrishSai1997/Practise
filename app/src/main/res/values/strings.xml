@@ -6,4 +6,7 @@
     <string name="nav_home">Home</string>
     <string name="nav_takeorder">Take Order</string>
     <string name="nav_account">My Account</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
