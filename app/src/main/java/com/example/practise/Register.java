@@ -80,7 +80,7 @@ public class Register extends AppCompatActivity {
         String email = userEmail.getText().toString();
         String password = userPassword.getText().toString();
 
-        if ( name.isEmpty() && email.isEmpty() && password.isEmpty() ){
+        if ( name.isEmpty() || email.isEmpty() || password.isEmpty() ){
             Toast.makeText(this, "Please Enter All The Details", Toast.LENGTH_SHORT).show();
         }
         else{
