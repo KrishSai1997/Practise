@@ -15,6 +15,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -24,8 +27,8 @@ public class Register extends AppCompatActivity {
     private Button regButton;
     private TextView userLogin;
     private FirebaseAuth firebaseAuth;
-    //private ProgressDialog progressDialog;
-    //private
+    private ProgressDialog progressDialog;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +37,40 @@ public class Register extends AppCompatActivity {
         setupUIViews();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        //progressDialog =new ProgressDialog((this));
+        progressDialog =new ProgressDialog((this));
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(validate()){
                     //Upload data to Database
-                    String user_email = userEmail.getText().toString().trim();
+                    final String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
+                    final String user_name = userName.getText().toString().trim();
 
                     firebaseAuth.createUserWithEmailAndPassword(user_email,user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                String user_id = firebaseAuth.getCurrentUser().getUid();
+                                DatabaseReference current_user_db = mDatabase.child(user_id);
+                                current_user_db.child("Name").setValue(user_name);
+                                current_user_db.child("E-Mail").setValue(user_email);
+
+
                                 Toast.makeText(Register.this,"Registration Successfull",Toast.LENGTH_SHORT).show();
+
+                                //Last Edit From Here
+                                //String user_id = ;
+
                                 startActivity(new Intent(Register.this, MainActivity.class));
                             }else{
+
+                                if(task.getException() instanceof FirebaseAuthUserCollisionException){
+                                    Toast.makeText(Register.this,"Email Is Already Registered",Toast.LENGTH_LONG).show();
+                                }
                                 Toast.makeText(Register.this,"Registration Failed",Toast.LENGTH_SHORT).show();
                             }
 

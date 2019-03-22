@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Password = (EditText)findViewById(R.id.etPassword);
         Login = (Button)findViewById(R.id.btnLogin);
         Signup = (TextView)findViewById(R.id.tvRegister);
+        FirebaseApp.initializeApp(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog =new ProgressDialog((this));
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                      startActivity(new Intent(MainActivity.this, HomeActivity.class));
                      Toast.makeText(MainActivity.this, "Login Successfull",Toast.LENGTH_SHORT).show();
                  }else{
-                     Toast.makeText(MainActivity.this, "Wrong Credentials",Toast.LENGTH_SHORT).show();
+                     Toast.makeText(MainActivity.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
                  }
             }
         });
